@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diva Creator - Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: auto;  /* Permet de faire défiler la page avec la molette */
+            position: relative;
+            text-align: center;
+        }
+
+        header {
+            background-color: #1c1c1c;
+            padding: 20px;
+            width: 100%;
+        }
+
+        header h1 {
+            color: #ff69b4; /* Light fuchsia color */
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 30px;
+            background-color: #ff69b4; /* Light fuchsia color */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #ff4d75; /* Darker pink on hover */
+            transform: translateY(-5px); /* Lifting effect */
+            box-shadow: 0 10px 20px rgba(255, 105, 180, 0.5); /* Enhanced shadow */
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        .feature {
+            width: 300px;
+            padding: 20px;
+            background-color: #1c1c1c;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 105, 180, 0.5);
+        }
+
+        .feature h3 {
+            color: #ff69b4;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #1c1c1c;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            color: #cccccc;
+        }
+
+        /* Style pour le fond animé */
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff69b4, #121212, #ff69b4, #121212);
+            background-size: 400% 400%;
+            z-index: -1;
+            transition: background-position 0.1s ease-out;
+        }
+
+        /* Style pour le formulaire Demo */
+        .demo-form {
+            background-color: #1c1c1c;
+            padding: 30px;
+            margin-top: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .demo-form select, .demo-form button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            box-shadow: 0 5px 10px rgba(255, 105, 180, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .demo-form select:hover, .demo-form button:hover {
+            background-color: #ff4d75;
+            box-shadow: 0 10px 15px rgba(255, 105, 180, 0.5);
+        }
+
+        .demo-form h2 {
+            color: #ff69b4;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-animation"></div>
+
+    <header>
+        <h1>Diva Creator</h1>
+        <p>Your Vision, Our Creation – Custom Software , Discord Bots , Websites & More !</p>
+    </header>
+
+    <div class="container">
+        <a href="https://discord.gg/xJhuUPW9gx" class="btn">Order a Product</a>
+        <a href="https://discord.gg/mKpsK2FBJt" class="btn">Our Discord</a>
+        <a href="#" class="btn" id="demoBtn">Estimation</a> <!-- Demo Button -->
+    </div>
+
+    <div id="demoSection" class="demo-form" style="display: none;">
+        <h2>Choose your product and options</h2>
+        <form id="demoForm">
+            <label for="product">Select Product :</label>
+            <select id="product" onchange="updateOptions()">
+                <option value="5">Applications / Software Python - 5€</option>
+                <option value="7">Applications / Software Electron - 7€</option>
+                <option value="10">Website - 10€</option>
+                <option value="10">Discord Bot Python - 10€</option>
+                <option value="25">Discord Bot Node JS - 25€</option>
+                <option value="2.50">Classic Tool Python - 2.50€</option>
+                <option value="5">Interfaces Tool Python - 5€</option>
+            </select>
+
+            <label for="option">Select Option :</label>
+            <select id="option">
+                <option value="1.50">Basic Option - 1.50€</option>
+                <option value="3">Advanced Option - 3.00€</option>
+            </select>
+
+            <button type="button" onclick="calculatePrice()">Calculate Price</button>
+        </form>
+
+        <p id="totalPrice" style="color: #ff69b4; text-align: center; font-size: 24px;"></p>
+    </div>
+
+    <div class="features" id="features">
+        <div class="feature">
+            <h3>Custom Applications</h3>
+            <p>We offer tailored applications in Python or Electron that suit your specific needs.</p>
+        </div>
+        <div class="feature">
+            <h3>Websites</h3>
+            <p>Create dynamic websites with HTML, CSS, and JavaScript, fully responsive and optimized.</p>
+        </div>
+        <div class="feature">
+            <h3>Discord Bots</h3>
+            <p>Build custom bots with Python or Node JS to enhance your Discord server functionality.</p>
+        </div>
+        <div class="feature">
+            <h3>Graphical Interfaces</h3>
+            <p>Interactive Python graphical user interfaces for a smoother user experience.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Diva Creator - All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript to make the background follow the mouse
+        const background = document.querySelector('.background-animation');
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth * 100;
+            const y = e.clientY / window.innerHeight * 100;
+            background.style.backgroundPosition = `${x}% ${y}%`;
+        });
+
+        // Show the demo section when clicking the Demo button
+        document.getElementById("demoBtn").addEventListener("click", function() {
+            const demoSection = document.getElementById("demoSection");
+            demoSection.style.display = demoSection.style.display === "none" ? "block" : "none";
+        });
+
+        // Update the options dynamically based on the selected product
+        function updateOptions() {
+            const productValue = parseFloat(document.getElementById("product").value);
+            
+            // Update options dynamically based on product
+            const optionSelect = document.getElementById("option");
+            optionSelect.innerHTML = ''; // Clear previous options
+
+            if (productValue === 5) {
+                optionSelect.innerHTML = `
+                    <option value="1.50">Basic Option - 1.50€</option>
+                    <option value="3">Advanced Option - 3.00€</option>
+                `;
+            } else if (productValue === 7) {
+                optionSelect.innerHTML = `
+                    <option value="1.50">Basic Option - 1.50€</option>
+                    <option value="3">Advanced Option - 3.00€</option>
+                `;
+            } else if (productValue === 10) {
+                optionSelect.innerHTML = `
+                    <option value="1.50">Basic Option - 1.50€</option>
+                    <option value="3">Advanced Option - 3.00€</option>
+                `;
+            } else if (productValue === 25) {
+                optionSelect.innerHTML = `
+                    <option value="1.50">Basic Option - 1.50€</option>
+                    <option value="3">Advanced Option - 3.00€</option>
+                `;
+            } else if (productValue === 2.50) {
+                optionSelect.innerHTML = `
+                    <option value="1.50">Basic Option - 1.50€</option>
+                    <option value="3">Advanced Option - 3.00€</option>
+                `;
+            } else if (productValue === 5) {
+                optionSelect.innerHTML = `
+                    <option value="1.50">Basic Option - 1.50€</option>
+                    <option value="3">Advanced Option - 3.00€</option>
+                `;
+            }
+        }
+
+        // Calculate the total price based on selected options
+        function calculatePrice() {
+            const productValue = parseFloat(document.getElementById("product").value);
+            const optionValue = parseFloat(document.getElementById("option").value);
+            const totalPrice = productValue + optionValue;
+            document.getElementById("totalPrice").innerText = `Total Price: ${totalPrice.toFixed(2)}€`;
+        }
+    </script>
+
+</body>
+</html>
+ 
